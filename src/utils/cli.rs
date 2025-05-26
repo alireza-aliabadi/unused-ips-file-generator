@@ -3,9 +3,6 @@
 
 use clap::Parser;
 use std::process::Command;
-// use std::error::Error;
-// use rayon::prelude::*;
-// use std::io::{self, Write, stdin, stdout};
 
 #[derive(Parser, Debug)]
 #[command(author="Alireza", version="0.1", about="unused ip scanner", long_about=None)]
