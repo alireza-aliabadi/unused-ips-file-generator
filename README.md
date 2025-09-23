@@ -1,4 +1,14 @@
-## why i got ip ranges start and ends from cli instead of reading user prompt
+# What it does
+scan ip range and write used and unused ips in seperate files inside directory which run program.
+> for each rerun, rewrite those files.
+
+## fast usage
+```bash
+cargo run -- --main-subnet 192.x.x --ranges-start-stop start,stop start,stop ... <ranges>
+
+```
+
+#### why i got ip ranges start and ends from cli instead of reading user prompt
 
 using while loop has cost of i/o systemcall to wait for user input and unwrapping and parsing costs
 
