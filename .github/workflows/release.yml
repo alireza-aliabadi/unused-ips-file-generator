@@ -2,6 +2,8 @@ name: Release Rust Binaries
 
 on:
   push:
+    branches:
+      - main
     tags:
       - "v*.*.*"
 
@@ -98,9 +100,11 @@ jobs:
           path: dist
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: ncipollo/release-action@v1
         with:
-          files: dist/**/*   # upload everything at once
-          overwrite_files: true
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+          artifacts: "dist/**/*"
+          tag: ${{ github.ref_name }}
+          allowUpdates: true
+          replacesArtifacts: true
+          token: ${{ github.token }}
+
