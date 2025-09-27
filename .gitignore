@@ -41,3 +41,6 @@ Desktop.ini
 *.out
 *.o
 
+# sign keys
+private*.*
+
