@@ -101,6 +101,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: dist/**/*   # upload everything at once
-          overwrite: true
+          overwrite_files: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
