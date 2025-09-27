@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -69,12 +70,15 @@ jobs:
 
       - name: Configure GPG
         run: |
-          echo "use-agent" >> ~/.gnupg/gpg.conf
+          mkdir -p ~/.gnupg
+          chmod 700 ~/.gnupg
           echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
+
       - name: Sign artifacts
         run: |
           for f in dist/*; do
-            gpg --batch --yes --passphrase "${{ secrets.GPG_PASSPHRASE }}" \
+            gpg --batch --yes --pinentry-mode loopback \
+                --passphrase "${{ secrets.GPG_PASSPHRASE }}" \
                 --armor --detach-sign "$f"
           done
 
@@ -88,7 +92,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download artifacts
+      - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
           path: dist
@@ -96,6 +100,6 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/**/*
+          files: dist/**/*   # upload everything at once
         env:
           GITHUB_TOKEN: ${{ github.token }}
