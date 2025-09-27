@@ -2,6 +2,8 @@ name: Release Rust Binaries
 
 on:
   push:
+    branches:
+      - main
     tags:
       - "v*.*.*"
 
@@ -44,20 +46,20 @@ jobs:
         shell: bash
         run: |
           BIN_NAME="ip-availablity-checker"
-          mkdir dist
+          TAG_NAME=${GITHUB_REF_NAME}
+          mkdir -p dist
 
           if [ "${{ matrix.deb }}" = "true" ]; then
             cargo deb --target ${{ matrix.target }}
-            cp target/${{ matrix.target }}/debian/*.deb dist/
+            for f in target/${{ matrix.target }}/debian/*.deb; do
+              NEW_NAME="dist/${BIN_NAME}-${TAG_NAME}-${{ matrix.target }}.deb"
+              cp "$f" "$NEW_NAME"
+            done
           fi
 
           cp target/${{ matrix.target }}/release/${BIN_NAME}${{ matrix.ext }} dist/
 
-          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            zip -j dist/${BIN_NAME}-${{ matrix.target }}.zip dist/${BIN_NAME}${{ matrix.ext }}
-          else
-            tar -czvf dist/${BIN_NAME}-${{ matrix.target }}.tar.gz -C dist ${BIN_NAME}${{ matrix.ext }}
-          fi
+          tar -czvf dist/${BIN_NAME}-${{ matrix.target }}.tar.gz -C dist ${BIN_NAME}${{ matrix.ext }}
 
           cd dist
           sha256sum * > SHA256SUMS.txt
