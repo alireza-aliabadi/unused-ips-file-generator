@@ -2,8 +2,6 @@ name: Release Rust Binaries
 
 on:
   push:
-    branches:
-      - main
     tags:
       - "v*.*.*"
 
@@ -119,4 +117,3 @@ jobs:
           allowUpdates: true
           replacesArtifacts: true
           token: ${{ github.token }}
-
