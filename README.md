@@ -1,6 +1,7 @@
 # What it does
-scan ip range by ping and write used and unused ips in seperate files <u>**inside directory which run program**</u>.
-> for each rerun, rewrite those files.
+Scan an IP range using ping and write the used and unused IPs into separate files **inside the directory where the program is run**.
+> The files are rewritten on each rerun.
+
 # flags
 **-m** or **--main-subnet**:
 
@@ -49,7 +50,7 @@ scan ip range by ping and write used and unused ips in seperate files <u>**insid
     ```
 ## using cargo
 1. clone project
-2. run by **cargo run** in cloned directory
+2. run using "**cargo run**" in cloned directory
     ```bash
     cargo run -- --main-subnet 192.x.x --ranges-start-stop start,stop start,stop ... <ranges>
     ```
