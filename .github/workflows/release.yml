@@ -21,6 +21,7 @@ jobs:
             target: x86_64-unknown-linux-gnu
             ext: ""
             deb: true
+            rpm: true
           - os: macos-latest
             target: x86_64-apple-darwin
             ext: ""
@@ -37,6 +38,9 @@ jobs:
         if: matrix.deb == true
         run: cargo install cargo-deb
 
+      - name: Install cargo-rpm
+        if: matrix.rpm == true
+        run: cargo install cargo-rpm
       - name: Build
         run: cargo build --release --target ${{ matrix.target }}
 
@@ -51,7 +55,15 @@ jobs:
             cargo deb --target ${{ matrix.target }}
             for f in target/${{ matrix.target }}/debian/*.deb; do
               NEW_NAME="dist/${BIN_NAME}-${TAG_NAME}-${{ matrix.target }}.deb"
-              cp "$f" "$NEW_NAME"
+              mv "$f" "$NEW_NAME"
+            done
+          fi
+
+          if [ "${{ matrix.rpm }}" = "true" ]; then
+            cargo rpm build --target ${{ matrix.target }}
+            for f in target/${{ matrix.target }}/release/rpmbuild/RPMS/x86_64/*.rpm; do
+              NEW_NAME="dist/${BIN_NAME}-${TAG_NAME}-${{ matrix.target }}.rpm"
+              mv "$f" "$NEW_NAME"
             done
           fi
 
