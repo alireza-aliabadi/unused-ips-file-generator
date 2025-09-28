@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [[bin]]
-name = "ip-availablity-checker"
+name = "available-ips-scanner"
 path = "src/main.rs"
 
 [dependencies]

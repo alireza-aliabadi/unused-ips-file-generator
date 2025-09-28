@@ -43,7 +43,7 @@ jobs:
       - name: Package artifacts
         shell: bash
         run: |
-          BIN_NAME="ip-availablity-checker"
+          BIN_NAME="available-ips-scanner"
           TAG_NAME=${GITHUB_REF_NAME}
           mkdir -p dist
 
