@@ -2,6 +2,7 @@
 name = "unused-ips-file-generator"
 version = "0.1.0"
 edition = "2024"
+description = "cli tool to scan ip ranges and write used/unused ips in files seperately"
 
 [[bin]]
 name = "available-ips-scanner"
