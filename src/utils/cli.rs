@@ -8,7 +8,7 @@ use std::process::Command;
 #[command(author="Alireza", version="0.1", about="unused ip scanner", long_about=None)]
 struct CliArgs {
     #[arg(
-        short,
+        short = 'm',
         long = "main-subnet",
         help = "static subnets of your ip (i.e 192.168.1)"
     )]
@@ -20,7 +20,7 @@ struct CliArgs {
         default_value = "0.3"
     )]
     ping_timeout: String,
-    #[arg(long="ranges-start-stop", value_name="RANGE_START_END", help="enter range start and end (i.e 52,62 65,75): ", num_args=1..)]
+    #[arg(short = 'r', long="ranges-start-stop", value_name="RANGE_START_END", help="enter range start and end (i.e 52,62 65,75): ", num_args=1..)]
     range_start_end: Vec<String>,
 }
 
