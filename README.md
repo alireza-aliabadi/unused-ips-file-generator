@@ -1,5 +1,5 @@
 # What it does
-Scan an IP range using ping and write the used and unused IPs into separate files **inside the directory where the program is run**.
+Scan an IP range using ping and write the used and unused IPs into separate files (named *used_ips.txt* and *unused_ips.txt*) **inside the directory where the program is run**.
 > The files are rewritten on each rerun.
 
 # flags
